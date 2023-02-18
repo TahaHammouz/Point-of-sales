@@ -1,0 +1,91 @@
+#components-layout-demo-custom-trigger .trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+/* Set background and box-shadow for site layout */
+.site-layout .site-layout-background {
+  background: #fff;
+  box-shadow: 0 0 3px #ccc;
+  border-radius: 5px;
+}
+
+/* Set border-radius for sider layout */
+.ant-layout-sider {
+  border-radius: 10px !important;
+}
+
+/* Set background and box-shadow for main layout */
+.ant-layout {
+  background-color: #fff;
+  box-shadow: 0 0 3px #ccc;
+}
+
+/* Set padding for main layout with sider */
+.ant-layout-has-sider {
+  padding: 15px !important;
+}
+
+/* Set padding and height for sider content */
+.ant-layout-sider-children {
+  padding-top: 15px;
+  padding-right: 20px;
+  height: 95vh;
+}
+
+/* Style header */
+.ant-layout-header {
+  margin: 10px !important;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+.anticon-menu-fold{
+  padding:13px
+}
+
+/* Set size and font for icon */
+.anticon svg {
+  height: 25px;
+  width: 25px;
+  font-size: 25px;
+}
+
+/* Style logo */
+.logo h3 {
+  color: #086e8d;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 100px;
+  padding-top: 10px;
+}
+
+/* Set background color for selected menu item */
+.ant-menu-item-selected {
+  background-color: #047979;
+}
+
+/* Set height for main layout with sider in specific cases */
+:where(.css-dev-only-do-not-override-diro6f).ant-layout.ant-layout-has-sider {
+  height: 55rem;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-layout.ant-layout-has-sider >.ant-layout {
+  background-color: #d8d7d7;
+
+}
+.anticon[tabindex] {
+  padding: 10px;
+}
