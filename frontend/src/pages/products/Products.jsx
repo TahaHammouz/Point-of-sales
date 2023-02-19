@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "antd";
-import { columns } from "./TableColumns";
-
+import { Table } from "antd";
+import { columns } from "./ProductsColumns";
+import Button from "../../components/UI/Button/Button";
+import ProductForm from "./ProductForm";
+import Modal from "../../components/UI/Modal/Modal";
 const Products = () => {
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,12 +26,13 @@ const Products = () => {
     }
     fetchData();
   }, []);
-  
 
   return (
     <>
+    
       <div className="d-flex justify-content-between">
         <h3>Products</h3>
+      
         <Button>Add Item</Button>
       </div>
       <Table
@@ -37,8 +40,7 @@ const Products = () => {
         dataSource={productList}
         loading={isLoading}
         rowKey="id"
-        pagination={{ pageSize: 4 }
-        }
+        pagination={{ pageSize: 4 }}
         bordered
       />
     </>
