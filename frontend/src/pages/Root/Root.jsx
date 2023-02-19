@@ -3,10 +3,10 @@ import { Layout } from "antd";
 import React, { useState } from "react";
 import "./Root.css";
 import SideMenu from "../../components/Menu/SideMenu";
-const { Sider, Content } = Layout;
-import CustomHeader from "../../components/Menu/Header";
+import CustomHeader from "../../components/Menu/CustomHeader";
 import CustomLayout from "../../components/Menu/CustomLayout";
 
+const { Sider, Content } = Layout;
 const RootLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -23,7 +23,11 @@ const RootLayout = () => {
         <SideMenu />
       </Sider>
       <CustomLayout>
-        <CustomHeader collapsed={collapsed} toggle={toggleCollapsed} colorBgContainer={"white"} />
+        <CustomHeader
+          collapsed={collapsed}
+          toggle={toggleCollapsed}
+          colorBgContainer={"white"}
+        />
         <Content
           style={{
             margin: "10px",
