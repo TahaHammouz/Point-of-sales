@@ -16,13 +16,6 @@ const Products = () => {
   const [error, setError] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const hideModal = () => {
-    setIsModalVisible(false);
-  };
   const handleSearch = (event) => {
     const value = event.target.value;
     const filteredList = originalProductList.filter((product) =>
@@ -52,21 +45,15 @@ const Products = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-between">
-        <h3>Products</h3>
-        <Button onClick={showModal}>Add Item</Button>
-        {isModalVisible && <ProductForm hideModalHandler={hideModal} />}
-      </div>
-
+      
+      <ProductForm />
       <Search
         placeholder="Search by product name"
         onKeyUp={handleSearch}
         onSearch={handleSearch}
         style={{ width: 300, marginBottom: 20 }}
       />
-      <ProductTable
-        dataSource={productList}
-      />
+      <ProductTable dataSource={productList} />
     </>
   );
 };

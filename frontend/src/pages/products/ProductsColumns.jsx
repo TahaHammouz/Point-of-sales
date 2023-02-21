@@ -32,10 +32,20 @@ export const columns = [
     title: "Actions",
     key: "actions",
     render: (_, record) => (
-      <Space size="middle">
-        <EditOutlined />
-        <DeleteOutlined />
-      </Space>
+      <div className="d-flex">
+        <EditOutlined
+          className="mx-2"
+          onClick={() => {
+            console.log(_.id);
+          }}
+        />
+        <DeleteOutlined
+          className="mx-2"
+          onClick={() => {
+            console.log(_.id);
+          }}
+        />
+      </div>
     ),
   },
 ];

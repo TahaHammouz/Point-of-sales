@@ -1,115 +1,108 @@
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
-import Modal from "../../components/UI/Modal/Modal";
-import styles from "./ProductForm.module.css";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../redux/slices/productSlice";
+import * as Yup from "yup";
+import { Modal, Button, Input, Select } from "antd";
+const { Option } = Select;
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Product name is required"),
+  imageUrl: Yup.string().required("Image URL is required"),
+  price: Yup.number().required("Price is required"),
+  code: Yup.string().required("Code is required"),
+});
 
-const initialValues = {
-  name: "",
-  image: "",
-  price: "",
-  category: "",
-  code: "",
-};
+const ProductForm = () => {
+  const [visible, setVisible] = useState(false);
 
-const ProductForm = ({ hideModalHandler }) => {
-  const dispatch = useDispatch();
-  const onSubmit = (values) => {
-    dispatch(
-      addProduct({
-        name: values.name,
-        image: values.image,
-        price: values.price,
-        category: values.category,
-        code: values.code,
-      })
-    );
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
     console.log(values);
+    setSubmitting(false);
+    resetForm();
+    setVisible(false);
   };
 
   return (
-    <Modal onClose={hideModalHandler}>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        <Form className={styles.form} style={{ justifyContent: "flex-end" }}>
-          <label htmlFor="productName" className={styles.label}>
-            Product Name
-          </label>
-          <Field
-            id="name"
-            name="name"
-            placeholder="Enter product name"
-            className={styles.input}
-            required
-          />
+    <>
+      <Button type="primary" onClick={showModal} style={{ float: "right" }}>
+        Add Product
+      </Button>
+      <Modal
+        title="Product form"
+        visible={visible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <Formik
+          initialValues={{
+            name: "",
+            imageUrl: "",
+            price: "",
+            code: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched, isSubmitting }) => (
+            <Form>
+              <label htmlFor="name">Product Name</label>
+              <Field name="name" as={Input} />
 
-          <label htmlFor="image" className={styles.label}>
-            Image URL
-          </label>
-          <Field
-            id="image"
-            name="image"
-            placeholder="Enter image URL"
-            className={styles.input}
-            required
-          />
+              {touched.name && errors.name && (
+                <div style={{ color: "red" }}>{errors.name}</div>
+              )}
 
-          <label htmlFor="price" className={styles.label}>
-            Price
-          </label>
-          <Field
-            id="price"
-            name="price"
-            type="number"
-            placeholder="Enter price"
-            className={styles.input}
-            required
-          />
+              <label htmlFor="imageUrl">Image URL</label>
+              <Field name="imageUrl" as={Input} />
 
-          <label htmlFor="category" className={styles.label}>
-            Category
-          </label>
-          <Field
-            as="select"
-            id="category"
-            name="category"
-            placeholder="Enter category"
-            className={styles.input}
-            required
-          >
-            <option value="">Select a category</option>
-            <option value="books">Books</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothing">Clothing</option>
-            <option value="beauty">Beauty</option>
-          </Field>
+              {touched.imageUrl && errors.imageUrl && (
+                <div style={{ color: "red" }}>{errors.imageUrl}</div>
+              )}
 
-          <label htmlFor="code" className={styles.label}>
-            Input Code
-          </label>
-          <Field
-            id="code"
-            name="code"
-            placeholder="Enter input code"
-            className={styles.input}
-            required
-          />
-          <div className={styles.actions}>
-            <button
-              type="submit"
-              id="action"
-              name="action"
-              className={styles.button}
-              onClick={hideModalHandler}
-            >
-              Cancel
-            </button>
-            <button type="submit" className={styles.button}>
-              Submit
-            </button>
-          </div>
-        </Form>
-      </Formik>
-    </Modal>
+              <label htmlFor="price">Price</label>
+              <Field name="price" as={Input} type="number" />
+
+              {touched.price && errors.price && (
+                <div style={{ color: "red" }}>{errors.price}</div>
+              )}
+              <label htmlFor="category">Category</label>
+              <Field name="category">
+                {({ field }) => (
+                  <Select
+                    {...field}
+                    style={{ width: "100%" }}
+                    placeholder="Please select"
+                  >
+                    <Option value="Electronics">Electronics</Option>
+                    <Option value="Clothing">Clothing</Option>
+                    <Option value="Home and Garden">Home and Garden</Option>
+                    <Option value="Sports">Sports</Option>
+                    <Option value="Beauty and Health">Beauty and Health</Option>
+                  </Select>
+                )}
+              </Field>
+
+              <label htmlFor="code">Code</label>
+              <Field name="code" as={Input} />
+
+              {touched.code && errors.code && (
+                <div style={{ color: "red" }}>{errors.code}</div>
+              )}
+
+              <Button type="primary" htmlType="submit" disabled={isSubmitting}>
+                Submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </Modal>
+    </>
   );
 };
 
