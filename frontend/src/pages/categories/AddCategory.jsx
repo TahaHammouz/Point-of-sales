@@ -3,10 +3,11 @@ import { Modal, Button, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { addCategory } from "../../redux/slices/categorySlice";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
+import * as Yup from "yup";
+import { saveCategory } from "../../redux/slices/categorySlice";
 const validationSchema = Yup.object().shape({
-  categoryName: Yup.string().required("Category name is required"),
+  category: Yup.string().required("Category name is required"),
 });
 
 const AddCategory = () => {
@@ -15,11 +16,12 @@ const AddCategory = () => {
 
   const formik = useFormik({
     initialValues: {
-      categoryName: "",
+      category: "",
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(addCategory({ id: Date.now(), category: values.categoryName }));
+      const newCategory = { id: Date.now(), category: values.category };
+      dispatch(saveCategory(newCategory));
       setVisible(false);
       formik.resetForm();
     },
@@ -36,7 +38,7 @@ const AddCategory = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal} style={{float:"right"}}>
+      <Button type="primary" onClick={showModal} style={{ float: "right" }}>
         Add Category
       </Button>
       <Modal
@@ -48,13 +50,13 @@ const AddCategory = () => {
       >
         <Input
           placeholder="Category Name"
-          name="categoryName"
-          value={formik.values.categoryName}
+          name="category"
+          value={formik.values.category}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.touched.categoryName && formik.errors.categoryName && (
-          <div style={{ color: "red" }}>{formik.errors.categoryName}</div>
+        {formik.touched.category && formik.errors.category && (
+          <div style={{ color: "red" }}>{formik.errors.category}</div>
         )}
       </Modal>
     </>
