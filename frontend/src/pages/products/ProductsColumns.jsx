@@ -1,4 +1,5 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Space } from "antd";
 export const columns = [
   {
     title: "Name",
@@ -28,13 +29,13 @@ export const columns = [
     key: "code",
   },
   {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <div className="d-flex">
-        <DeleteOutlined className="mx-2" />
-        <EditOutlined className="mx-2" />
-      </div>
+    title: "Actions",
+    key: "actions",
+    render: (_, record) => (
+      <Space size="middle">
+        <EditOutlined />
+        <DeleteOutlined />
+      </Space>
     ),
   },
 ];

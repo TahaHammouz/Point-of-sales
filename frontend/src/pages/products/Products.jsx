@@ -5,13 +5,24 @@ import ProductForm from "./ProductForm";
 import Modal from "../../components/UI/Modal/Modal";
 import { Input } from "antd";
 import CustomTable from "../../components/UI/Table/Table";
+import ProductTable from "./ProductTable";
+import { useSelector } from "react-redux";
 const { Search } = Input;
 const Products = () => {
+  const prod = useSelector((state) => state.product.products);
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [originalProductList, setOriginalProductList] = useState([]);
   const [error, setError] = useState();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const hideModal = () => {
+    setIsModalVisible(false);
+  };
   const handleSearch = (event) => {
     const value = event.target.value;
     const filteredList = originalProductList.filter((product) =>
@@ -19,9 +30,7 @@ const Products = () => {
     );
     setProductList(filteredList);
   };
-  const handleClearSearch = () => {
-    setProductList(originalProductList);
-  };
+
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
@@ -45,24 +54,18 @@ const Products = () => {
     <>
       <div className="d-flex justify-content-between">
         <h3>Products</h3>
-
-        <Button>Add Item</Button>
+        <Button onClick={showModal}>Add Item</Button>
+        {isModalVisible && <ProductForm hideModalHandler={hideModal} />}
       </div>
 
       <Search
         placeholder="Search by product name"
         onKeyUp={handleSearch}
         onSearch={handleSearch}
-        onClear={handleClearSearch}
         style={{ width: 300, marginBottom: 20 }}
       />
-      <CustomTable
-        columns={columns}
+      <ProductTable
         dataSource={productList}
-        isLoading={isLoading}
-        rowKey="id"
-        pagination={{ pageSize: 4 }}
-        bordered
       />
     </>
   );
