@@ -30,12 +30,20 @@ const categoriesSlice = createSlice({
         (category) => category.id !== id
       );
     },
+    updateCategoryData: (state, action) => {
+      const { id, category } = action.payload;
+      const categoryIndex = state.categories.findIndex(
+        (category) => category.id === id
+      );
+      state.categories[categoryIndex] = category;
+    },
   },
 });
 
 export const {
   addCategory,
   setLoading,
+  updateCategoryData,
   setCategoriesData,
   deleteCategory,
 } = categoriesSlice.actions;
@@ -116,7 +124,29 @@ export const deleteCategoryById = (id) => async (dispatch, getState) => {
       message: `Category deletion failed: ${error.message}`,
     });
   } finally {
-    dispatch(setLoading(false)); 
+    dispatch(setLoading(false));
   }
 };
+export const updateCategory =
+  ({ id, category }) =>
+  async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/categories/${id}`,
+        { category }
+      );
+      dispatch(updateCategoryAction({ id, category: response.data }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+export const removeCategoryAction = (id) => ({
+  type: "categories/removeCategory",
+  payload: id,
+});
+
+export const updateCategoryAction = (id, category) => ({
+  type: "categories/updateCategory",
+  payload: { id, category },
+});
