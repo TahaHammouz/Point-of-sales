@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import CustomTable from "../../components/UI/Table/Table";
 import { columns } from "./CategoriesColumns";
+import CustomTable from "../../components/UI/Table/Table";
+import { useState } from "react";
 import { Input } from "antd";
 
 const { Search } = Input;
 
-const CategoryTable = () => {
-  const categories = useSelector((state) => state.categories.categories);
+const CategoryTable = ({ categories }) => {
   const [searchInput, setSearchInput] = useState("");
 
   const filteredCategories = categories.filter((category) => {
@@ -18,8 +16,6 @@ const CategoryTable = () => {
       category.id.toString().includes(searchInput.trim().toLowerCase())
     );
   });
-
-  const getKey = (record, index) => record.id;
 
   return (
     <>
@@ -35,7 +31,7 @@ const CategoryTable = () => {
         bordered
         columns={columns}
         dataSource={filteredCategories}
-        rowKey={getKey}
+        rowKey={(record) => record.id}
       />
     </>
   );

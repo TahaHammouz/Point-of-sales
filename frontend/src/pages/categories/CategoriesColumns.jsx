@@ -1,4 +1,13 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { deleteCategoryById } from "../../redux/slices/categorySlice";
+import store from "../../redux/index";
+import { fetchCategories } from "../../redux/slices/categorySlice";
+
+const handleDelete = (id) => {
+  store.dispatch(deleteCategoryById(id)).then(() => {
+    store.dispatch(fetchCategories());
+  });
+};
 export const columns = [
   {
     title: "Category Name",
@@ -18,9 +27,7 @@ export const columns = [
         />
         <DeleteOutlined
           className="mx-2"
-          onClick={() => {
-            console.log(_.id);
-          }}
+          onClick={() => handleDelete(record.id)}
         />
       </div>
     ),

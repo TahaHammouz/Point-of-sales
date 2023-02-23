@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
+import axios from "axios";
 
 const initialState = {
   categories: JSON.parse(localStorage.getItem("categories")) || [],
+  loading: false,
 };
 
 const categoriesSlice = createSlice({
@@ -16,18 +18,33 @@ const categoriesSlice = createSlice({
       };
       state.categories.push(newCategory);
     },
-    setCategories: (state, action) => {
+    setCategoriesData: (state, action) => {
       state.categories = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    deleteCategory: (state, action) => {
+      const id = action.payload;
+      state.categories = state.categories.filter(
+        (category) => category.id !== id
+      );
     },
   },
 });
 
-export const { addCategory } = categoriesSlice.actions;
+export const {
+  addCategory,
+  setLoading,
+  setCategoriesData,
+  deleteCategory,
+} = categoriesSlice.actions;
 export default categoriesSlice;
 
 export const saveCategory = (category) => async (dispatch, getState) => {
   try {
-    notification.info({message:"loading..."})
+    dispatch(setLoading(true));
+    notification.info({ message: "loading..." });
     const response = await fetch("http://localhost:3000/categories", {
       method: "POST",
       headers: {
@@ -35,37 +52,71 @@ export const saveCategory = (category) => async (dispatch, getState) => {
       },
       body: JSON.stringify(category),
     });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
     const data = await response.json();
     dispatch(addCategory(data));
-    notification.destroy()
+    dispatch(setLoading(false));
+    notification.destroy();
     notification.success({
-      message: "Product added successfully",
+      message: "Category added successfully",
     });
 
     const state = getState();
     const categories = state.categories.categories;
     localStorage.setItem("categories", JSON.stringify(categories));
-
-   
   } catch (error) {
+    dispatch(setLoading(false));
     notification.error({
-      message: "Product adding failed",
+      message: `Category adding failed: ${error.message}`,
     });
   }
 };
 
 export const fetchCategories = () => async (dispatch) => {
   try {
+    dispatch(setLoading(true));
     const response = await fetch("http://localhost:3000/categories");
     const data = await response.json();
-    dispatch(setCategories(data));
+    dispatch(setCategoriesData(data));
     localStorage.setItem("categories", JSON.stringify(data));
   } catch (error) {
-    toast.error("Error fetching categories");
+    dispatch(setLoading(false));
+    notification.error({
+      message: `Category adding failed: ${error.message}`,
+    });
+  } finally {
+    dispatch(setLoading(false));
   }
 };
 
-export const setCategories = (categories) => ({
-  type: "categories/setCategories",
-  payload: categories,
-});
+export const deleteCategoryById = (id) => async (dispatch, getState) => {
+  try {
+    dispatch(setLoading(true));
+    notification.info({ message: "loading..." });
+    const response = await fetch(`http://localhost:3000/categories/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    dispatch(deleteCategory(id));
+    notification.destroy();
+    notification.success({
+      message: "Category deleted successfully",
+    });
+    const state = getState();
+    const categories = state.categories.categories.filter(
+      (category) => category.id !== id
+    );
+    localStorage.setItem("categories", JSON.stringify(categories));
+  } catch (error) {
+    notification.error({
+      message: `Category deletion failed: ${error.message}`,
+    });
+  } finally {
+    dispatch(setLoading(false)); 
+  }
+};
+
