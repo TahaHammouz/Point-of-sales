@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
 import axios from "axios";
-
+import { API_BASE_URL } from "../../constants/api";
 const initialState = {
   categories: JSON.parse(localStorage.getItem("categories")) || [],
   loading: false,
@@ -53,7 +53,7 @@ export const saveCategory = (category) => async (dispatch, getState) => {
   try {
     dispatch(setLoading(true));
     notification.info({ message: "loading..." });
-    const response = await fetch("http://localhost:3000/categories", {
+    const response = await fetch(`${API_BASE_URL}/categories`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export const saveCategory = (category) => async (dispatch, getState) => {
 export const fetchCategories = () => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    const response = await fetch("http://localhost:3000/categories");
+    const response = await fetch(`${API_BASE_URL}/categories`);
     const data = await response.json();
     dispatch(setCategoriesData(data));
     localStorage.setItem("categories", JSON.stringify(data));
@@ -103,7 +103,7 @@ export const deleteCategoryById = (id) => async (dispatch, getState) => {
   try {
     dispatch(setLoading(true));
     notification.info({ message: "loading..." });
-    const response = await fetch(`http://localhost:3000/categories/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/categories/${id}`, {
       method: "DELETE",
     });
     if (!response.ok) {
@@ -136,6 +136,7 @@ export const updateCategory =
         { category }
       );
       dispatch(updateCategoryAction({ id, category: response.data }));
+      localStorage.setItem(`category_${id}`, JSON.stringify(response.data));
     } catch (error) {
       console.error(error);
     }
