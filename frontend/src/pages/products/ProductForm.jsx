@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
+import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { Modal, Button, Input, Select } from "antd";
 const { Option } = Select;
@@ -12,6 +13,7 @@ const validationSchema = Yup.object().shape({
 
 const ProductForm = () => {
   const [visible, setVisible] = useState(false);
+  const categories = useSelector((state) => state.categories.categories);
 
   const showModal = () => {
     setVisible(true);
@@ -35,7 +37,7 @@ const ProductForm = () => {
       </Button>
       <Modal
         title="Product form"
-        visible={visible}
+        open={visible}
         onCancel={handleCancel}
         footer={null}
       >
@@ -79,11 +81,11 @@ const ProductForm = () => {
                     style={{ width: "100%" }}
                     placeholder="Please select"
                   >
-                    <Option value="Electronics">Electronics</Option>
-                    <Option value="Clothing">Clothing</Option>
-                    <Option value="Home and Garden">Home and Garden</Option>
-                    <Option value="Sports">Sports</Option>
-                    <Option value="Beauty and Health">Beauty and Health</Option>
+                    {categories.map((category) => (
+                      <Option key={category.id} value={category.category}>
+                        {category.category}
+                      </Option>
+                    ))}
                   </Select>
                 )}
               </Field>

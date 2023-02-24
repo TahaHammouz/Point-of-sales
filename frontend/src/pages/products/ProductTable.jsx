@@ -1,20 +1,39 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import CustomTable from "../../components/UI/Table/Table";
 import { columns } from "./ProductsColumns";
-import { useSelector } from "react-redux";
+import { Input } from "antd";
 
-const ProductTable = ({ dataSource }) => {
+const { Search } = Input;
+
+const ProductTable = ({ products }) => {
+  const [filteredProducts, setFilteredProducts] = useState(products);
   const getKey = (record, index) => record.code;
+
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    const filteredList = products.filter((product) =>
+      product.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredProducts(filteredList);
+  };
+
   return (
-    <CustomTable
-      columns={columns}
-      dataSource={dataSource.map((product) => ({
-        ...product,
-        key: product.id,
-      }))}
-      rowKey={getKey}
-      pagination={{ pageSize: 4 }}
-      bordered
-    />
+    <>
+      <Search
+        placeholder="Search by product name"
+        onKeyUp={handleSearch}
+        onSearch={handleSearch}
+        style={{ width: 300, marginBottom: 20 }}
+      />
+      <CustomTable
+        columns={columns}
+        dataSource={filteredProducts}
+        rowKey={getKey}
+        pagination={{ pageSize: 4 }}
+        bordered
+      />
+    </>
   );
 };
 
