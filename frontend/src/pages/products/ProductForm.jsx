@@ -1,19 +1,29 @@
 import React, { useState } from "react";
-import { Formik, Form, Field } from "formik";
-import { useSelector } from "react-redux";
+import { Formik, Form, Field, useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { Modal, Button, Input, Select } from "antd";
+import { addProductData } from "../../redux/slices/productSlice";
+import { notification } from "antd";
+
 const { Option } = Select;
+
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Product name is required"),
   imageUrl: Yup.string().required("Image URL is required"),
-  price: Yup.number().required("Price is required"),
+  price: Yup.number()
+    .moreThan(0, "Price must be greater than 0")
+    .required("Price is required"),
+  category: Yup.string().required("Category is required"),
   code: Yup.string().required("Code is required"),
 });
 
 const ProductForm = () => {
   const [visible, setVisible] = useState(false);
   const categories = useSelector((state) => state.categories.categories);
+  const products = useSelector((state) => state.product.products);
+
+  const dispatch = useDispatch();
 
   const showModal = () => {
     setVisible(true);
@@ -23,12 +33,36 @@ const ProductForm = () => {
     setVisible(false);
   };
 
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    console.log(values);
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    const existingProduct = products.find(
+      (product) => product.code === values.code
+    );
+    if (existingProduct) {
+      notification.error({
+        message: "Error",
+        description: "Product code already exists on the server",
+      });
+      setSubmitting(false);
+      return;
+    }
+
+    dispatch(addProductData(values));
     setSubmitting(false);
     resetForm();
     setVisible(false);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      imageUrl: "",
+      price: "",
+      category: "",
+      code: "",
+    },
+    validationSchema,
+    onSubmit: handleSubmit,
+  });
 
   return (
     <>
@@ -40,18 +74,21 @@ const ProductForm = () => {
         open={visible}
         onCancel={handleCancel}
         footer={null}
+        destroyOnClose={true}
+        maskClosable={false}
       >
         <Formik
           initialValues={{
             name: "",
             imageUrl: "",
             price: "",
+            category: "",
             code: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched, isSubmitting }) => (
+          {({ errors, touched, isSubmitting, values, setFieldValue }) => (
             <Form>
               <label htmlFor="name">Product Name</label>
               <Field name="name" as={Input} />
@@ -73,14 +110,16 @@ const ProductForm = () => {
               {touched.price && errors.price && (
                 <div style={{ color: "red" }}>{errors.price}</div>
               )}
+
               <label htmlFor="category">Category</label>
               <Field name="category">
-                {({ field }) => (
+                {({ field, form }) => (
                   <Select
                     {...field}
-                    style={{ width: "100%" }}
-                    placeholder="Please select"
+                    value={field.value}
+                    onChange={(value) => form.setFieldValue(field.name, value)}
                   >
+                    <Option value="">Select a category</Option>
                     {categories.map((category) => (
                       <Option key={category.id} value={category.category}>
                         {category.category}
@@ -90,15 +129,20 @@ const ProductForm = () => {
                 )}
               </Field>
 
+              {formik.touched.category && formik.errors.category && (
+                <div style={{ color: "red" }}>{formik.errors.category}</div>
+              )}
+              <br />
+
               <label htmlFor="code">Code</label>
               <Field name="code" as={Input} />
 
-              {touched.code && errors.code && (
-                <div style={{ color: "red" }}>{errors.code}</div>
+              {formik.touched.code && formik.errors.code && (
+                <div style={{ color: "red" }}>{formik.errors.code}</div>
               )}
 
               <Button type="primary" htmlType="submit" disabled={isSubmitting}>
-                Submit
+                {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
             </Form>
           )}
@@ -107,5 +151,4 @@ const ProductForm = () => {
     </>
   );
 };
-
 export default ProductForm;

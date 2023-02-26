@@ -22,12 +22,9 @@ const CategoryTable = () => {
     if (!category.hasOwnProperty("category")) {
       return false;
     }
-    return (
-      category.category
-        .toLowerCase()
-        .includes(searchInput.trim().toLowerCase()) ||
-      category.id.toString().includes(searchInput.trim().toLowerCase())
-    );
+    return category.category
+      .toLowerCase()
+      .includes(searchInput.trim().toLowerCase());
   });
 
   const handleDelete = (id) => {
@@ -60,7 +57,7 @@ const CategoryTable = () => {
     setEditModalVisible(false);
     setEditedCategory(null);
     const form = editFormRef.current;
-    form.resetFields(); // reset the form fields
+    form.resetFields();
   };
 
   const editFormRef = useRef(null);

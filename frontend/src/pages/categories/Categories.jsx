@@ -1,12 +1,11 @@
 import CategoryTable from "./CategoryTable";
 import AddCategory from "./AddCategory";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCategories } from "../../redux/slices/categorySlice";
 
 const Categories = () => {
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -15,7 +14,7 @@ const Categories = () => {
   return (
     <>
       <AddCategory />
-      <CategoryTable categories={categories} />
+      <CategoryTable />
     </>
   );
 };

@@ -142,11 +142,6 @@ export const updateCategory =
     }
   };
 
-export const removeCategoryAction = (id) => ({
-  type: "categories/removeCategory",
-  payload: id,
-});
-
 export const updateCategoryAction = (id, category) => ({
   type: "categories/updateCategory",
   payload: { id, category },
