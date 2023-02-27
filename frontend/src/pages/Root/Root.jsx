@@ -18,7 +18,7 @@ const RootLayout = () => {
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo">
-          <h3>POS</h3>
+          <h3>{collapsed ? "RP" : "React POS"}</h3>
         </div>
         <SideMenu />
       </Sider>

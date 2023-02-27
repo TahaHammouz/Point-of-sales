@@ -74,11 +74,22 @@
   width: 100px;
 }
 .ant-layout-content {
-  height: 80vh;
+  height: 75vh;
   overflow-y: scroll;
 }
 
 .ant-modal-close-x {
   background-color: white !important;
   color: black !important;
+}
+.spinner{
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+}
+.spinner-border{
+  height: 100px;
+  width: 100px;
 }
