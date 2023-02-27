@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomTable from "../../components/UI/Table/Table";
-import { Input, Modal, Button, Form, notification,Select } from "antd";
+import { Input, Modal, Button, Form, notification, Select } from "antd";
 import * as Yup from "yup";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
@@ -96,7 +96,9 @@ const ProductTable = () => {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (text) => <img src={text} alt="Product" style={{ width: 70 }} />,
+      render: (text) => (
+        <img  src={text} alt="Product" style={{ width: 70 }} />
+      ),
     },
     {
       title: "Price",
@@ -161,19 +163,18 @@ const ProductTable = () => {
             />
           </Form.Item>
           <Form.Item label="Category">
-          <Select
-            value={editValues?.category}
-            onChange={(value) => handleEditChange("category", value)}
-          >
-          {categories.map((category) => (
-            <Select.Option key={category.id} value={category.category}>
-              {category.category}
-            </Select.Option>
-          ))}
-          </Select>
-        </Form.Item>
-        
-        
+            <Select
+              value={editValues?.category}
+              onChange={(value) => handleEditChange("category", value)}
+            >
+              {categories.map((category) => (
+                <Select.Option key={category.id} value={category.category}>
+                  {category.category}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
           <Form.Item label="Code">
             <Input
               value={editValues?.code}

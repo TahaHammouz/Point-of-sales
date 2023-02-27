@@ -10,13 +10,19 @@ const { Option } = Select;
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Product name is required"),
-  imageUrl: Yup.string().required("Image URL is required"),
+  imageUrl: Yup.string()
+    .required("Image URL is required")
+    .matches(
+      /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/,
+      "Please enter a valid image URL"
+    ),
   price: Yup.number()
     .moreThan(0, "Price must be greater than 0")
     .required("Price is required"),
   category: Yup.string().required("Category is required"),
   code: Yup.string().required("Code is required"),
 });
+
 
 const ProductForm = () => {
   const [visible, setVisible] = useState(false);
@@ -92,31 +98,30 @@ const ProductForm = () => {
             <Form>
               <label htmlFor="name">Product Name</label>
               <Field name="name" as={Input} />
-
+      
               {touched.name && errors.name && (
                 <div style={{ color: "red" }}>{errors.name}</div>
               )}
-
+      
               <label htmlFor="imageUrl">Image URL</label>
-              <Field name="imageUrl" as={Input} />
-
+              <Field name="imageUrl" as={Input} type="url" />
+      
               {touched.imageUrl && errors.imageUrl && (
                 <div style={{ color: "red" }}>{errors.imageUrl}</div>
               )}
-
+      
               <label htmlFor="price">Price</label>
               <Field name="price" as={Input} type="number" />
-
+      
               {touched.price && errors.price && (
                 <div style={{ color: "red" }}>{errors.price}</div>
               )}
-
+      
               <label htmlFor="category">Category</label>
               <Field name="category">
                 {({ field, form }) => (
                   <Select
                     {...field}
-                    value={field.value}
                     onChange={(value) => form.setFieldValue(field.name, value)}
                   >
                     <Option value="">Select a category</Option>
@@ -128,19 +133,19 @@ const ProductForm = () => {
                   </Select>
                 )}
               </Field>
-
-              {formik.touched.category && formik.errors.category && (
-                <div style={{ color: "red" }}>{formik.errors.category}</div>
+      
+              {touched.category && errors.category && (
+                <div style={{ color: "red" }}>{errors.category}</div>
               )}
               <br />
-
+      
               <label htmlFor="code">Code</label>
               <Field name="code" as={Input} />
-
-              {formik.touched.code && formik.errors.code && (
-                <div style={{ color: "red" }}>{formik.errors.code}</div>
+      
+              {touched.code && errors.code && (
+                <div style={{ color: "red" }}>{errors.code}</div>
               )}
-
+      
               <Button type="primary" htmlType="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
@@ -148,6 +153,7 @@ const ProductForm = () => {
           )}
         </Formik>
       </Modal>
+      
     </>
   );
 };
