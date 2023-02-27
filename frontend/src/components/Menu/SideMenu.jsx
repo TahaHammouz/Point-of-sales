@@ -7,29 +7,51 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 const SideMenu = () => {
-  return (
-    <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-      <Menu.Item key="1" icon={<UserOutlined />}>
+  const menuItems = [
+    {
+      key: "1",
+      icon: <UserOutlined />,
+      label: (
         <Link to="/home" style={{ textDecoration: "none" }}>
           Home
         </Link>
-      </Menu.Item>
-      <Menu.Item key="2" icon={<UnorderedListOutlined />}>
+      ),
+    },
+    {
+      key: "2",
+      icon: <UnorderedListOutlined />,
+      label: (
         <Link to="/products" style={{ textDecoration: "none" }}>
           Products
         </Link>
-      </Menu.Item>
-      <Menu.Item key="3" icon={<ProfileOutlined />}>
+      ),
+    },
+    {
+      key: "3",
+      icon: <ProfileOutlined />,
+      label: (
         <Link to="/categories" style={{ textDecoration: "none" }}>
           Categories
         </Link>
-      </Menu.Item>
-      <Menu.Item key="4" icon={<LogoutOutlined />}>
+      ),
+    },
+    {
+      key: "4",
+      icon: <LogoutOutlined />,
+      label: (
         <Link to="/logout" style={{ textDecoration: "none" }}>
           Logout
         </Link>
-      </Menu.Item>
-    </Menu>
+      ),
+    },
+  ];
+  return (
+    <Menu
+      theme="dark"
+      mode="inline"
+      defaultSelectedKeys={["1"]}
+      items={menuItems}
+    />
   );
 };
 export default SideMenu;
