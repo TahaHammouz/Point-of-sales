@@ -3,15 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Table, InputNumber } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import CustomTable from "../../components/UI/Table/Table";
-import { addItemToCart,updateCartItemOnServer } from "../../redux/slices/cartSlice";
+import {
+  removeCartItem,
+  updateCartItemOnServer,
+  fetchCartItems,
+} from "../../redux/slices/cartSlice";
 
 const CheckoutCart = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  const loading = useSelector((state) => state.cart.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+    dispatch(fetchCartItems());
+  }, [dispatch]);
+
+  const handleQuantityChange = (record, value) => {
+    dispatch(updateCartItemOnServer(record.id, value));
+  };
+
+  const handleRemoveItem = (record) => {
+    dispatch(removeCartItem(record.id));
+  };
+
   const columns = [
     {
       title: "Product Name",
@@ -22,7 +36,7 @@ const CheckoutCart = () => {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (text, record) => <a>{text}$</a>,
+      render: (text) => <a>{text}$</a>,
     },
     {
       title: "Quantity",
@@ -31,11 +45,8 @@ const CheckoutCart = () => {
       render: (text, record) => (
         <InputNumber
           min={1}
-          
           value={record.quantity}
-          onChange={(value) => {
-            dispatch(updateCartItemOnServer(record.id, value));
-          }}
+          onChange={(value) => handleQuantityChange(record, value)}
         />
       ),
     },
@@ -49,10 +60,12 @@ const CheckoutCart = () => {
       title: "",
       dataIndex: "actions",
       key: "actions",
-      render: (text, record) => <DeleteOutlined />,
+      render: (text, record) => (
+        <DeleteOutlined onClick={() => handleRemoveItem(record)} />
+      ),
     },
   ];
-  console.log(cartItems);
+
   return (
     <CustomTable
       columns={columns}
@@ -60,6 +73,7 @@ const CheckoutCart = () => {
       rowKey={(record) => record.id}
       bordered
       pagination={false}
+      isLoading={loading}
     />
   );
 };

@@ -23,6 +23,9 @@ const cartSlice = createSlice({
         });
       }
     },
+    setCartItems: (state, action) => {
+      state.items = action.payload;
+    },
     updateCartItem(state, action) {
       const { id, quantity } = action.payload;
       const itemIndex = state.items.findIndex((item) => item.id === id);
@@ -31,6 +34,9 @@ const cartSlice = createSlice({
         state.items[itemIndex].total = state.items[itemIndex].price * quantity;
       }
     },
+    deleteCartItem(state, action) {
+      state.items = state.items.filter((item) => item.id !== action.payload.id);
+    },
 
     setLoading(state, action) {
       state.loading = action.payload;
@@ -38,7 +44,13 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItemToCart, setLoading, updateCartItem } = cartSlice.actions;
+export const {
+  addItemToCart,
+  setLoading,
+  updateCartItem,
+  setCartItems,
+  deleteCartItem,
+} = cartSlice.actions;
 
 export default cartSlice;
 
@@ -68,15 +80,41 @@ export const addToCart = (item) => async (dispatch, getState) => {
   }
 };
 export const updateCartItemOnServer = (id, quantity) => async (dispatch) => {
-  dispatch(setLoading(true)); 
+  dispatch(setLoading(true));
   try {
     const response = await axios.patch(`${API_BASE_URL}/cart/${id}`, {
-      quantity: quantity, 
+      quantity: quantity,
     });
-    dispatch(updateCartItem(response.data)); 
+    dispatch(updateCartItem(response.data));
   } catch (error) {
     console.error("Error updating cart item:", error);
   } finally {
-    dispatch(setLoading(false)); 
+    dispatch(setLoading(false));
+  }
+};
+export const removeCartItem = (id) => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/cart/${id}`);
+    dispatch(deleteCartItem(response.data));
+    dispatch(fetchCartItems());
+  } catch (error) {
+    console.error("Error deleting cart item:", error);
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+export const fetchCartItems = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/cart`);
+    const items = response.data;
+    dispatch(setCartItems(items));
+  } catch (error) {
+    console.error("Error fetching cart items from server:", error);
+    notification.error({
+      message: "Error fetching cart items",
+      description: error.message,
+    });
   }
 };
