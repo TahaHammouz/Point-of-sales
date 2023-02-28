@@ -207,7 +207,7 @@ const ProductTable = () => {
         columns={columns}
         dataSource={filteredProducts}
         rowKey={(record) => record.code}
-        pagination={{ pageSize: 6 }}
+        pagination={{ pageSize: 5 }}
         bordered
         isLoading={loading}
       />

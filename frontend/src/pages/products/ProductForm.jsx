@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { Modal, Button, Input, Select } from "antd";
 import { addProductData } from "../../redux/slices/productSlice";
 import { notification } from "antd";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const { Option } = Select;
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Product name is required"),
-  imageUrl: Yup.string()
+  image: Yup.string()
     .required("Image URL is required")
     .matches(
       /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/,
@@ -22,7 +22,6 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required("Category is required"),
   code: Yup.string().required("Code is required"),
 });
-
 
 const ProductForm = () => {
   const [visible, setVisible] = useState(false);
@@ -58,18 +57,6 @@ const ProductForm = () => {
     setVisible(false);
   };
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      imageUrl: "",
-      price: "",
-      category: "",
-      code: "",
-    },
-    validationSchema,
-    onSubmit: handleSubmit,
-  });
-
   return (
     <>
       <Button type="primary" onClick={showModal} style={{ float: "right" }}>
@@ -86,7 +73,7 @@ const ProductForm = () => {
         <Formik
           initialValues={{
             name: "",
-            imageUrl: "",
+            image: "",
             price: "",
             category: "",
             code: "",
@@ -94,29 +81,20 @@ const ProductForm = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched, isSubmitting, values, setFieldValue }) => (
+          {({ errors, touched, isSubmitting }) => (
             <Form>
               <label htmlFor="name">Product Name</label>
               <Field name="name" as={Input} />
-      
-              {touched.name && errors.name && (
-                <div style={{ color: "red" }}>{errors.name}</div>
-              )}
-      
-              <label htmlFor="imageUrl">Image URL</label>
-              <Field name="imageUrl" as={Input} type="url" />
-      
-              {touched.imageUrl && errors.imageUrl && (
-                <div style={{ color: "red" }}>{errors.imageUrl}</div>
-              )}
-      
+              <ErrorMessage name="name" />
+
+              <label htmlFor="image">Image URL</label>
+              <Field name="image" as={Input} type="url" />
+              <ErrorMessage name="image" />
+
               <label htmlFor="price">Price</label>
               <Field name="price" as={Input} type="number" />
-      
-              {touched.price && errors.price && (
-                <div style={{ color: "red" }}>{errors.price}</div>
-              )}
-      
+              <ErrorMessage name="price" />
+
               <label htmlFor="category">Category</label>
               <Field name="category">
                 {({ field, form }) => (
@@ -133,19 +111,17 @@ const ProductForm = () => {
                   </Select>
                 )}
               </Field>
-      
               {touched.category && errors.category && (
                 <div style={{ color: "red" }}>{errors.category}</div>
               )}
               <br />
-      
+
               <label htmlFor="code">Code</label>
               <Field name="code" as={Input} />
-      
               {touched.code && errors.code && (
                 <div style={{ color: "red" }}>{errors.code}</div>
               )}
-      
+
               <Button type="primary" htmlType="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
@@ -153,7 +129,6 @@ const ProductForm = () => {
           )}
         </Formik>
       </Modal>
-      
     </>
   );
 };
