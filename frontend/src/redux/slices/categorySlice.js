@@ -131,10 +131,9 @@ export const updateCategory =
   ({ id, category }) =>
   async (dispatch) => {
     try {
-      const response = await axios.put(
-        `http://localhost:3000/categories/${id}`,
-        { category }
-      );
+      const response = await axios.put(`${API_BASE_URL}/categories/${id}`, {
+        category,
+      });
       dispatch(updateCategoryAction({ id, category: response.data }));
       localStorage.setItem(`category_${id}`, JSON.stringify(response.data));
     } catch (error) {
@@ -143,6 +142,30 @@ export const updateCategory =
   };
 
 export const updateCategoryAction = (id, category) => ({
-  type: "categories/updateCategory",
+  type: "categories/updateCategoryData",
+  payload: { id, category },
+});
+export const addCategoryAction = (id, category) => ({
+  type: "categories/addCategory",
+  payload: { id, category },
+});
+
+export const setLoadingAction = (loading) => ({
+  type: "categories/setLoading",
+  payload: loading,
+});
+
+export const setCategoriesDataAction = (categories) => ({
+  type: "categories/setCategoriesData",
+  payload: categories,
+});
+
+export const deleteCategoryAction = (id) => ({
+  type: "categories/deleteCategory",
+  payload: id,
+});
+
+export const updateCategoryDataAction = (id, category) => ({
+  type: "categories/updateCategoryData",
   payload: { id, category },
 });

@@ -156,3 +156,48 @@ export const updateProduct = (code, product) => async (dispatch, getState) => {
     dispatch(setLoading(false));
   }
 };
+
+export const addProductAction = (product) => {
+  return {
+    type: "product/addProduct",
+    payload: {
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: product.price,
+      category: product.category,
+      code: product.code,
+    },
+  };
+};
+
+export const setProductsDataAction = (products) => {
+  return {
+    type: "product/setProductsData",
+    payload: products,
+  };
+};
+
+export const setLoadingAction = (isLoading) => {
+  return {
+    type: "product/setLoading",
+    payload: isLoading,
+  };
+};
+
+export const deleteProductAction = (prodCode) => {
+  return {
+    type: "product/deleteProduct",
+    payload: prodCode,
+  };
+};
+
+export const editProductAction = (id, product) => {
+  return {
+    type: "product/editProduct",
+    payload: {
+      id: id,
+      product: product,
+    },
+  };
+};
