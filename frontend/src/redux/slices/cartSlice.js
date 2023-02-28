@@ -23,28 +23,38 @@ const cartSlice = createSlice({
         });
       }
     },
-
     setLoading(state, action) {
       state.loading = action.payload;
     },
   },
 });
 
-export const { addItemToCart, setLoading } = cartSlice.actions;
+export const { addItemToCart, setLoading, updateCartItem } = cartSlice.actions;
 
 export default cartSlice;
 
-export const addToCart = (item) => async (dispatch) => {
+export const addToCart = (item) => async (dispatch, getState) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/cart`, {
-      ...item,
-      quantity: 1,
-      total: item.price,
-    });
-    dispatch(addItemToCart(response.data));
+    const state = getState();
+    const existingItem = state.cart.items.find((i) => i.id === item.id);
+    if (existingItem) {
+      const response = await axios.patch(
+        `${API_BASE_URL}/cart/${existingItem.id}`,
+        {
+          quantity: existingItem.quantity + 1,
+          total: (existingItem.quantity + 1) * existingItem.price,
+        }
+      );
+      dispatch(addItemToCart(response.data));
+    } else {
+      const response = await axios.post(`${API_BASE_URL}/cart`, {
+        ...item,
+        quantity: 1,
+        total: item.price,
+      });
+      dispatch(addItemToCart(response.data));
+    }
   } catch (error) {
     console.log("Error:", error);
   }
 };
-
-
