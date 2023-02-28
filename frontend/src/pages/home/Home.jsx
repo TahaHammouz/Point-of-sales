@@ -7,10 +7,10 @@ function Home() {
   return (
     <div className={styles.home}>
       <Row gutter={20}>
-        <Col span={11} className={styles.POS}>
+        <Col span={9} className={styles.POS}>
           <POS />
         </Col>
-        <Col span={11} offset={1} className={styles.Checkout}>
+        <Col span={9} offset={1} className={styles.Checkout}>
           <CheckoutCart />
         </Col>
       </Row>

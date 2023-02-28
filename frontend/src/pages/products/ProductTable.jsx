@@ -60,9 +60,6 @@ const ProductTable = () => {
 
   const handleEditSubmit = async (code) => {
     try {
-      const values = await editProductSchema.validate(editValues, {
-        abortEarly: false,
-      });
       dispatch(setLoading(true));
       const productToUpdate = products.find((product) => product.code === code);
       const { id, ...updatedValues } = editValues;
@@ -96,9 +93,7 @@ const ProductTable = () => {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (text) => (
-        <img  src={text} alt="Product" style={{ width: 70 }} />
-      ),
+      render: (text) => <img src={text} alt="Product" style={{ width: 70 }} />,
     },
     {
       title: "Price",
