@@ -82,14 +82,18 @@
   background-color: white !important;
   color: black !important;
 }
-.spinner{
+.spinner {
   z-index: 10;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50% , -50%);
+  transform: translate(-50%, -50%);
 }
-.spinner-border{
+.spinner-border {
   height: 100px;
   width: 100px;
+}
+:where(.css-dev-only-do-not-override-diro6f).ant-table-wrapper {
+  overflow: scroll;
+  max-height: 50vh;
 }

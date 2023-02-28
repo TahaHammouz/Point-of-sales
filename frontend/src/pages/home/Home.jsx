@@ -1,17 +1,16 @@
 import { Col, Row } from "antd";
-import { Fragment } from "react";
 import CheckoutCart from "./CheckoutCart";
 import POS from "./POS";
 import styles from "./Home.module.css";
 
 function Home() {
   return (
-    <div style={{ background: "#f5f5f5", padding: "20px" }}>
+    <div className={styles.home}>
       <Row gutter={20}>
-        <Col span={16}>
+        <Col span={11} className={styles.POS}>
           <POS />
         </Col>
-        <Col span={7} offset={1}>
+        <Col span={11} offset={1} className={styles.Checkout}>
           <CheckoutCart />
         </Col>
       </Row>

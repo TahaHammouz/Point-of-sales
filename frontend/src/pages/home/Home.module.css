@@ -1,18 +1,16 @@
 .home {
-  display: flex;
-  height: 80vh;
-  background-color: #a1a1a1;
+  padding: 20px;
 }
 
 .POS {
-  flex: 1;
-  background-color: #f5f5f5;
+  background: #e9ecef;
   padding: 20px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .Checkout {
-  flex: 1;
-  background-color: #ffffff;
+  background: #e9ecef;
   padding: 20px;
+  position: fixed;
+  right:12%
 }
