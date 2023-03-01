@@ -18,7 +18,7 @@ const POS = () => {
     <Row gutter={20}>
       {products.map((item) => {
         return (
-          <Col xs={24} lg={25} md={12} sm={6} key={item.id}>
+          <Col xs={24} lg={9} md={12} sm={14} key={item.id}>
             <Items item={item} />
           </Col>
         );

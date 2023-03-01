@@ -8,6 +8,8 @@ const CustomTable = ({
   rowKey,
   pagination,
   bordered,
+  width,
+  height,
 }) => {
   return (
     <Table
@@ -17,6 +19,7 @@ const CustomTable = ({
       rowKey={rowKey}
       pagination={pagination}
       bordered={bordered}
+      scroll={{ x: width, y: height }}
     />
   );
 };

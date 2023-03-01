@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Table, InputNumber } from "antd";
+import { InputNumber } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import CustomTable from "../../components/UI/Table/Table";
+import CheckoutSummary from "./CheckoutSummary";
 import {
   removeCartItem,
   updateCartItemOnServer,
@@ -47,6 +48,7 @@ const CheckoutCart = () => {
           min={1}
           value={record.quantity}
           onChange={(value) => handleQuantityChange(record, value)}
+          style={{ width: 70 }}
         />
       ),
     },
@@ -67,14 +69,21 @@ const CheckoutCart = () => {
   ];
 
   return (
-    <CustomTable
-      columns={columns}
-      dataSource={cartItems}
-      rowKey={(record) => record.id}
-      bordered
-      pagination={false}
-      isLoading={loading}
-    />
+    <>
+      <CustomTable
+        columns={columns}
+        dataSource={cartItems}
+        rowKey={(record) => record.id}
+        bordered
+        pagination={false}
+        isLoading={loading}
+        height={400}
+        width={460}
+      />
+      <div>
+        <CheckoutSummary taxRate={0.1} discount={0.05} />
+      </div>
+    </>
   );
 };
 

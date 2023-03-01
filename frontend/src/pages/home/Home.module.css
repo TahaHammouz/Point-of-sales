@@ -1,16 +1,4 @@
 .home {
-  padding: 20px;
-}
-
-.POS {
-  background: #e9ecef;
-  padding: 20px;
-  overflow: auto;
-}
-
-.Checkout {
-  background: #e9ecef;
-  padding: 20px;
-  position: fixed;
-  right:12%
+  display: flex;
+  flex-direction: column;
 }
