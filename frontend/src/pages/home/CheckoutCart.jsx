@@ -70,18 +70,19 @@ const CheckoutCart = () => {
 
   return (
     <>
-      <CustomTable
-        columns={columns}
-        dataSource={cartItems}
-        rowKey={(record) => record.id}
-        bordered
-        pagination={false}
-        isLoading={loading}
-        height={400}
-        width={460}
-      />
-      <div>
-        <CheckoutSummary taxRate={0.1} discount={0.05} />
+      <div style={{ position: "fixed",width: "30%" }}>
+        <CustomTable
+          columns={columns}
+          dataSource={cartItems}
+          rowKey={(record) => record.id}
+          bordered
+          pagination={false}
+          isLoading={loading}
+          height={330}
+          width={450}
+        />
+
+        <CheckoutSummary />
       </div>
     </>
   );

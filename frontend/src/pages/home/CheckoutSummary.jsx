@@ -18,7 +18,7 @@ const CheckoutSummary = () => {
 
   return (
       <div className={styles["checkout-summary"]}>
-         
+         <br />
       <div>
         <label>Subtotal:</label>
         <span>{subTotal.toFixed(2)}$</span>

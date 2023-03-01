@@ -94,6 +94,6 @@
   width: 100px;
 }
 :where(.css-dev-only-do-not-override-diro6f).ant-table-wrapper {
-  overflow: scroll;
-  max-height: 50vh;
+ 
+  max-height: 90vh;
 }
