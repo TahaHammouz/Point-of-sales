@@ -13,7 +13,7 @@ const validationSchema = Yup.object().shape({
   image: Yup.string()
     .required("Image URL is required")
     .matches(
-      /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/,
+      /^(http|https):\/\/[^\s/$.?#].[^\s]*$/i,
       "Please enter a valid image URL"
     ),
   price: Yup.number()
