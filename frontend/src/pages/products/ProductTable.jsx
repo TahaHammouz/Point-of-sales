@@ -84,7 +84,7 @@ const ProductTable = () => {
 
   const columns = [
     {
-      title: "Name",
+      title: "Product Name",
       dataIndex: "name",
       key: "name",
       render: (text) => <a>{text}</a>,
@@ -93,7 +93,11 @@ const ProductTable = () => {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (text) => <img src={text} alt="Product" style={{ width: 70 }} />,
+      render: (text) => (
+        <div style={{ width: "50px", height: "50px" }}>
+          <img src={text} alt="Product" style={{ width: "100%", height: "100%" }} />
+        </div>
+      ),
     },
     {
       title: "Price",

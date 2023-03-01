@@ -37,7 +37,7 @@ const CheckoutCart = () => {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (text) => <a>{text}$</a>,
+      render: (text) => <a>${text}</a>,
     },
     {
       title: "Quantity",
@@ -56,7 +56,7 @@ const CheckoutCart = () => {
       title: "Total",
       dataIndex: "total",
       key: "total",
-      render: (text, record) => <a>{record.total}$</a>,
+      render: (text, record) => <a>${record.total}</a>,
     },
     {
       title: "",

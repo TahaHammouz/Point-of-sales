@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { InputNumber } from "antd";
+import { Button, InputNumber } from "antd";
 import styles from "./CheckoutSummary.module.css";
 
 const CheckoutSummary = () => {
@@ -17,13 +17,14 @@ const CheckoutSummary = () => {
   const totalPrice = subTotal + taxAmount - discountAmount;
 
   return (
-      <div className={styles["checkout-summary"]}>
-         <br />
-      <div>
+    <div className={styles["checkout-summary"]}>
+      <br />
+      <div className={styles.container}>
         <label>Subtotal:</label>
         <span>{subTotal.toFixed(2)}$</span>
       </div>
-      <div>
+
+      <div className={styles.container}>
         <label>Tax:</label>
         <InputNumber
           value={tax}
@@ -31,10 +32,9 @@ const CheckoutSummary = () => {
           formatter={(value) => `${value}%`}
           parser={(value) => value.replace("%", "")}
           size="small"
-         
         />
       </div>
-      <div>
+      <div className={styles.container}>
         <label>Discount:</label>
         <InputNumber
           value={discount}
@@ -44,15 +44,21 @@ const CheckoutSummary = () => {
           size="small"
         />
       </div>
-      <div>
-        <label>Tax Amount:</label> <span>{taxAmount.toFixed(2)}$</span>
+      <div className={styles.container}>
+        <label>Tax Amount:</label> <span>${taxAmount.toFixed(2)}</span>
       </div>
-      <div>
+      <div className={styles.container}>
         <label>Discount Amount:</label>
-        <span>{discountAmount.toFixed(2)}$</span>
+        <span>${discountAmount.toFixed(2)}</span>
+      </div>
+      <hr />
+      <div className={styles.container}>
+        <label className={styles.total}>Total Price:</label>
+        <h4>${totalPrice.toFixed(2)}</h4>
       </div>
       <div>
-        <label>Total Price:</label> <h3>{totalPrice.toFixed(2)}$</h3>
+        <Button type="danger">Cancel</Button>
+        <Button type="primary">Payment</Button>
       </div>
     </div>
   );
