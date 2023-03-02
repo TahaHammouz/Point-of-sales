@@ -1,0 +1,36 @@
+.checkout-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  max-height: 1rem;
+}
+
+.total {
+  line-height: 2rem;
+}
+.checkout-summary label {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.checkout-summary span {
+  margin-left: auto;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.checkout-summary h3 {
+  color: #32cd32;
+}
+.input {
+  font-size: 20px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.cancel {
+  background-color: red;
+}

@@ -9,6 +9,7 @@ const Items = ({ item }) => {
   const handleAddToCart = () => {
     const cartItem = {
       id: item.id,
+      image: item.image,
       name: item.name,
       price: item.price,
       quantity: 1,
@@ -20,13 +21,11 @@ const Items = ({ item }) => {
 
   return (
     <div className={styles.item}>
-      <h4>{item.name}</h4>
       <img src={item.image} alt="item" height="100" width="100" />
-      <h4>
-        <b>Price : </b>
-        {item.price}$
-      </h4>
-      <div className="d-flex justify-content-end">
+      <h4>{item.name}</h4>
+
+      <h4>${item.price}</h4>
+      <div className="d-flex justify-content-center">
         <Button onClick={handleAddToCart}>Add To Cart</Button>
       </div>
     </div>

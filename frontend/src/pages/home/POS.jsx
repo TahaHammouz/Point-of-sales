@@ -54,7 +54,7 @@ const POS = () => {
           )
           .map((item) => {
             return (
-              <Col xs={24} lg={5} md={12} sm={14} key={item.id}>
+              <Col span={6} xs={24} lg={6} md={12} sm={6} key={item.id}>
                 <Items item={item} />
               </Col>
             );
