@@ -15,6 +15,11 @@ import { tokenLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
+    path: "/auth",
+    element: <AuthenticationPage />,
+    action: authAction,
+  },
+  {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
@@ -42,19 +47,17 @@ const router = createBrowserRouter([
         loader: checkAuthLoader,
       },
       {
-        path: "/auth",
-        element: <AuthenticationPage />,
-        action: authAction,
-      },
-      {
         path: "/logout",
         action: logoutAction,
         loader: checkAuthLoader,
       },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
     ],
   },
 ]);
-
 const App = () => {
   return <RouterProvider router={router} />;
 };

@@ -1,0 +1,44 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-size: 100% 100%;
+}
+
+.form {
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.control {
+  margin-bottom: 10px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-weight: 700;
+}
+.button {
+  display: block;
+  margin-top: 10px;
+  background-color: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}

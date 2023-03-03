@@ -15,3 +15,22 @@ ul {
   margin: 0;
   padding: 0;
 }
+.ant-btn-primary {
+  font: inherit;
+  border: 1px solid #001529;
+  background: #00182e;
+  color: white;
+  padding: 0.25rem 1rem;
+}
+
+.ant-btn:hover,
+.ant-btn:focus {
+  background: #047979;
+  border-color: #047979;
+}
+
+:where(.css-dev-only-do-not-override-diro6f).ant-btn-primary {
+  color: #fff;
+  background-color: #1e375a;
+  box-shadow: 0 2px 0 rgb(5 145 255 / 10%);
+}
