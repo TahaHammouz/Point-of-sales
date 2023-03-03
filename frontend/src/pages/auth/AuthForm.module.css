@@ -4,8 +4,11 @@
   align-items: center;
   height: 90vh;
   background-size: 100% 100%;
+  width: 409px;
 }
-
+.section{
+  width: 409px;
+}
 .form {
   border: 2px solid #ccc;
   padding: 20px;
@@ -41,4 +44,6 @@
   padding: 10px;
   cursor: pointer;
   font-size: 16px;
+  margin-left: 40%;
+
 }
