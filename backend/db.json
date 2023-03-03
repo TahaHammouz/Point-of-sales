@@ -1,0 +1,123 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Siniora Food",
+      "image": "https://cdnprod.mafretailproxy.com/sys-master-root/h3c/he0/28432299261982/1311783_main.jpg_480Wx480H",
+      "price": 4,
+      "category": "deli",
+      "code": "9584781"
+    },
+    {
+      "id": 2,
+      "name": "Coca-Cola 250ml",
+      "image": "https://www.pngfind.com/pngs/m/678-6781957_coke-can-png-coca-cola-can-png-transparent.png",
+      "price": 1,
+      "category": "drinks",
+      "code": "455123"
+    },
+    {
+      "id": 3,
+      "name": "Tomato",
+      "image": "https://i5.walmartimages.com/asr/9f8b7456-81d0-4dc2-b422-97cf63077762.0ddba51bbf14a5029ce82f5fce878dee.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+      "price": 1,
+      "category": "vegetables",
+      "code": "231423"
+    },
+    {
+      "id": 4,
+      "name": "meat",
+      "image": "https://www.foodmanufacture.co.uk/var/wrbm_gb_food_pharma/storage/images/_aliases/wrbm_large/publications/food-beverage-nutrition/foodmanufacture.co.uk/article/2021/02/01/meat-trends-market-prospers-in-face-of-pandemic/12148503-4-eng-GB/Meat-trends-market-prospers-in-face-of-pandemic.jpg",
+      "price": 20,
+      "category": "deli",
+      "code": "424242"
+    },
+    {
+      "name": "eggs",
+      "image": "https://assets.epicurious.com/photos/5947cff5214b311c5ab9e3bf/16:9/w_2560%2Cc_limit/shutterstock_496596814.jpg",
+      "price": 4,
+      "category": "fresh food",
+      "code": "41222",
+      "id": 5
+    },
+    {
+      "name": "Ariel",
+      "image": "https://rukminim1.flixcart.com/image/416/416/juyev0w0/washing-powder/4/h/h/1500-areal-ariel-original-imaffytr2uhkqjcu.jpeg?q=70",
+      "price": 12,
+      "category": "non-food",
+      "code": "11926",
+      "id": 6
+    }
+  ],
+  "cart": [
+    {
+      "id": 2,
+      "image": "https://www.pngfind.com/pngs/m/678-6781957_coke-can-png-coca-cola-can-png-transparent.png",
+      "name": "Coca-Cola 250ml",
+      "price": 1,
+      "quantity": 7,
+      "total": 7
+    },
+    {
+      "id": 3,
+      "image": "https://i5.walmartimages.com/asr/9f8b7456-81d0-4dc2-b422-97cf63077762.0ddba51bbf14a5029ce82f5fce878dee.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+      "name": "Tomato",
+      "price": 1,
+      "quantity": 2,
+      "total": 2
+    },
+    {
+      "id": 1,
+      "image": "https://cdnprod.mafretailproxy.com/sys-master-root/h3c/he0/28432299261982/1311783_main.jpg_480Wx480H",
+      "name": "Siniora Food",
+      "price": 4,
+      "quantity": 1,
+      "total": 4
+    },
+    {
+      "id": 6,
+      "image": "https://rukminim1.flixcart.com/image/416/416/juyev0w0/washing-powder/4/h/h/1500-areal-ariel-original-imaffytr2uhkqjcu.jpeg?q=70",
+      "name": "Ariel",
+      "price": 12,
+      "quantity": 1,
+      "total": 12
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "taha",
+      "password": "taha123"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1677437610652,
+      "category": "drinks"
+    },
+    {
+      "id": 1677588198563,
+      "category": "deli"
+    },
+    {
+      "id": 1677671739182,
+      "category": "fresh food"
+    },
+    {
+      "id": 1677671759989,
+      "category": "non-food"
+    },
+    {
+      "id": 1677802838822,
+      "category": "vegetables"
+    },
+    {
+      "id": 1677802879481,
+      "category": "chocalate"
+    },
+    {
+      "id": 1677856890117,
+      "category": "chips"
+    }
+  ]
+}
