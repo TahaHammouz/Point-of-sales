@@ -9,15 +9,11 @@ import {
   updateCartItemOnServer,
   fetchCartItems,
 } from "../../redux/slices/cartSlice";
-import styles from "./CheckoutSummary.module.css"
+import styles from "./CheckoutSummary.module.css";
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const loading = useSelector((state) => state.cart.loading);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCartItems());
-  }, [dispatch]);
 
   const handleQuantityChange = (record, value) => {
     dispatch(updateCartItemOnServer(record.id, value));
@@ -83,8 +79,10 @@ const Cart = () => {
           dataSource={cartItems}
           rowKey={(record) => record.id}
           bordered
-          pagination={{ pageSize: 5 }}
+          pagination={false}
           isLoading={loading}
+          height={299}
+          
         />
         <hr />
         <CheckoutSummary />

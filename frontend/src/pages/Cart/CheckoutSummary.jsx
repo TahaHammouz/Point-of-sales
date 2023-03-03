@@ -18,13 +18,11 @@ const CheckoutSummary = () => {
   const totalPrice = subTotal + taxAmount - discountAmount;
 
   return (
-    <div className={styles["checkout-summary"]}>
-      <br />
+    <div className={styles["checkout-summary"]} style={{ textAlign: 'left' }}>
       <div className={styles.container}>
         <label>Subtotal: &nbsp;</label>
         <span>{subTotal.toFixed(2)}$</span>
       </div>
-
       <div className={styles.container}>
         <label>Tax: &nbsp;</label>
         <InputNumber
@@ -58,7 +56,6 @@ const CheckoutSummary = () => {
         <label>Discount Amount: &nbsp;</label>
         <span>${discountAmount.toFixed(2)}</span>
       </div>
-      <hr />
       <div className={styles.container}>
         <label className={styles.total}>Total Price: </label>
         <h3>${totalPrice.toFixed(2)}</h3>
