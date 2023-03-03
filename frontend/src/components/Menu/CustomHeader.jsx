@@ -22,7 +22,6 @@ const CustomHeader = ({ collapsed, toggle, colorBgContainer }) => {
         <b>
           <p className="mt-3 mr-2">{cartItems.length}</p>
         </b>
-
         <ShoppingCartOutlined onClick={() => navigate("/cart")} />
       </div>
     </Header>

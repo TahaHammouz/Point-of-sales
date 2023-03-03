@@ -5,8 +5,9 @@ import {
   ProfileOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 const SideMenu = () => {
+
   const menuItems = [
     {
       key: "1",
@@ -39,12 +40,24 @@ const SideMenu = () => {
       key: "4",
       icon: <LogoutOutlined />,
       label: (
-        <Link to="/logout" style={{ textDecoration: "none" }}>
-          Logout
-        </Link>
+        <Form action="/logout" method="post" style={{ textDecoration: "none" }}>
+          <button
+            type="submit"
+            style={{
+              border: "none",
+              background: "none",
+              cursor: "pointer",
+              color: "inherit",
+            }}
+          >
+            Logout
+          </button>
+        </Form>
       ),
-    },
+    }, 
   ];
+
+  
   return (
     <Menu
       theme="dark"
