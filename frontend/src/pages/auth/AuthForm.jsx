@@ -8,7 +8,7 @@ const AuthForm = () => {
         <Form method="post" className={classes.form} >
           <div label>
             <label className={classes.label} htmlFor="username">username</label>
-            <input id="username" name="username" />
+            <input className={classes.input} id="username" name="username" />
           </div>
           <div className={classes.control}>
             <label className={classes.label} htmlFor="password">Password</label>
