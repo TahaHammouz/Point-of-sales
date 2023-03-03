@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import Button from "../../components/UI/Button/Button";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlice";
@@ -23,7 +23,6 @@ const Items = ({ item }) => {
     <div className={styles.item}>
       <img src={item.image} alt="item" height="100" width="100" />
       <h4>{item.name}</h4>
-
       <h4>${item.price}</h4>
       <div className="d-flex justify-content-center">
         <Button onClick={handleAddToCart}>Add To Cart</Button>
