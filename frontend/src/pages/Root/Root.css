@@ -94,6 +94,9 @@
   width: 100px;
 }
 :where(.css-dev-only-do-not-override-diro6f).ant-table-wrapper {
- 
   max-height: 90vh;
+  overflow: scroll;
+}
+.cart-count {
+  cursor: pointer;
 }

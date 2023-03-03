@@ -17,7 +17,7 @@ const CategoryTable = () => {
   const [editedCategory, setEditedCategory] = useState(null);
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.categories);
-
+console.log(categories);
   const filteredCategories = categories.filter((category) => {
     if (!category.hasOwnProperty("category")) {
       return false;

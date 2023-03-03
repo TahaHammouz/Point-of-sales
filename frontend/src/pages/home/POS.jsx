@@ -3,8 +3,9 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../../redux/slices/productSlice";
-import { addItemToCart } from "../../redux/slices/cartSlice";
+import { addItemToCart, fetchCartItems } from "../../redux/slices/cartSlice";
 import Items from "./Items";
+import { fetchCategories } from "../../redux/slices/categorySlice";
 
 const POS = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -15,6 +16,8 @@ const POS = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
+    dispatch(fetchCartItems());
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   return (
@@ -34,16 +37,17 @@ const POS = () => {
             All products
           </Button>
         </Col>
-        {categories.map((category) => (
-          <Col key={category}>
-            <Button
-              type={category === selectedCategory ? "primary" : ""}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category}
-            </Button>
-          </Col>
-        ))}
+        {Array.isArray(categories) &&
+          categories.map((category) => (
+            <Col key={category}>
+              <Button
+                type={category === selectedCategory ? "primary" : ""}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </Button>
+            </Col>
+          ))}
       </Row>
       <Row gutter={15}>
         {products

@@ -2,6 +2,7 @@
   box-shadow: 0 0 3px rgba(110, 110, 110, 0.781);
   padding: 15px;
   margin-top: 20px;
+  background-color: rgb(255, 255, 255);
 }
 .item:hover {
   transform: scale(1.05);
@@ -19,6 +20,5 @@
 
 .item button {
   margin-top: 10px;
-  background-color: rgb(15, 155, 15) !important;
   color: white !important;
 }
