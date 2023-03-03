@@ -5,6 +5,7 @@ import { Modal, Button, Input, Select } from "antd";
 import { addProductData } from "../../redux/slices/productSlice";
 import { notification } from "antd";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import InputMask from "react-input-mask";
 
 const { Option } = Select;
 
@@ -20,7 +21,12 @@ const validationSchema = Yup.object().shape({
     .moreThan(0, "Price must be greater than 0")
     .required("Price is required"),
   category: Yup.string().required("Category is required"),
-  code: Yup.string().required("Code is required"),
+  code: Yup.string()
+    .required("Code is required")
+    .matches(/^([A-Z0-9]){3}-([A-Z0-9]){3}-([A-Z0-9]){3}$/, {
+      message: "Please enter a valid code",
+      excludeEmptyString: true,
+    }),
 });
 
 const ProductForm = () => {
@@ -90,11 +96,11 @@ const ProductForm = () => {
               <label htmlFor="image">Image URL</label>
               <Field name="image" as={Input} type="url" />
               <ErrorMessage name="image" />
-
+              <br />
               <label htmlFor="price">Price</label>
               <Field name="price" as={Input} type="number" />
               <ErrorMessage name="price" />
-
+              <br />
               <label htmlFor="category">Category</label>
               <Field name="category">
                 {({ field, form }) => (
@@ -103,11 +109,12 @@ const ProductForm = () => {
                     onChange={(value) => form.setFieldValue(field.name, value)}
                   >
                     <Option value="">Select a category</Option>
-                    {Array.isArray(categories) &&categories.map((category) => (
-                      <Option key={category.id} value={category.category}>
-                        {category.category}
-                      </Option>
-                    ))}
+                    {Array.isArray(categories) &&
+                      categories.map((category) => (
+                        <Option key={category.id} value={category.category}>
+                          {category.category}
+                        </Option>
+                      ))}
                   </Select>
                 )}
               </Field>
@@ -117,7 +124,23 @@ const ProductForm = () => {
               <br />
 
               <label htmlFor="code">Code</label>
-              <Field name="code" as={Input} />
+              <Field name="code">
+                {({ field, form }) => (
+                  <InputMask
+                    {...field}
+                    mask="aaa-aaa-aaa"
+                    maskChar=""
+                    onChange={(event) => {
+                      form.setFieldValue(
+                        field.name,
+                        event.target.value.toUpperCase()
+                      );
+                    }}
+                  >
+                    {(inputProps) => <Input {...inputProps} />}
+                  </InputMask>
+                )}
+              </Field>
               {touched.code && errors.code && (
                 <div style={{ color: "red" }}>{errors.code}</div>
               )}
