@@ -95,7 +95,11 @@ const ProductTable = () => {
       key: "image",
       render: (text) => (
         <div style={{ width: "50px", height: "50px" }}>
-          <img src={text} alt="Product" style={{ width: "100%", height: "100%" }} />
+          <img
+            src={text}
+            alt="Product"
+            style={{ width: "100%", height: "100%" }}
+          />
         </div>
       ),
     },
@@ -103,7 +107,7 @@ const ProductTable = () => {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (text) => <a>{text}$</a>,
+      render: (text) => <a>${text}</a>,
     },
     {
       title: "Category",
@@ -166,7 +170,7 @@ const ProductTable = () => {
               value={editValues?.category}
               onChange={(value) => handleEditChange("category", value)}
             >
-              {categories.map((category) => (
+              {Array.isArray(categories) &&categories.map((category) => (
                 <Select.Option key={category.id} value={category.category}>
                   {category.category}
                 </Select.Option>

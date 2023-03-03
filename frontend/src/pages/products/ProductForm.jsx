@@ -103,7 +103,7 @@ const ProductForm = () => {
                     onChange={(value) => form.setFieldValue(field.name, value)}
                   >
                     <Option value="">Select a category</Option>
-                    {categories.map((category) => (
+                    {Array.isArray(categories) &&categories.map((category) => (
                       <Option key={category.id} value={category.category}>
                         {category.category}
                       </Option>
