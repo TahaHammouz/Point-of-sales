@@ -33,7 +33,7 @@ This Point-of-sale system is a web app designed to be used by supermarkets, to h
 <img src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" height="50" width="50"/>
 <img src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" height="50" width="50"/>
 <img src="https://user-images.githubusercontent.com/25181517/187896150-cc1dcb12-d490-445c-8e4d-1275cd2388d6.png" height="50" width="50"/>
-<img src="https://static-00.iconduck.com/assets.00/react-router-icon-512x279-zswz065s.png" height="50" width="50"/>
+<img src="https://www.svgrepo.com/show/354262/react-router.svg" height="50" width="50"/>
 <img src="https://user-images.githubusercontent.com/4060187/61057426-4e5a4600-a3c3-11e9-9114-630743e05814.png" height="50" width="50"/>
 <img src="https://user-images.githubusercontent.com/25181517/190887795-99cb0921-e57f-430b-a111-e165deedaa36.png" height="50" width="50"/>
 </p>
