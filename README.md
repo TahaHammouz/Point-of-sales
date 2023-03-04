@@ -43,7 +43,7 @@ This Point-of-sale system is a web app designed to be used by supermarkets, to h
 
 <h2>Point-Of-Sales Documentation </h2>
 <a href="https://img.icons8.com/ios-filled/512/notion.png"></a>
-
+<a href="https://west-supply-52c.notion.site/Documentation-bdd19fb1906a47019ea24750f980c306"><img src="https://img.icons8.com/ios-filled/512/notion.png" alt="notion" style="width:50px;height:50px;"></a>
 
 <h2>Setting up the project</h2>
 <ul>   
