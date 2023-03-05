@@ -8,7 +8,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../../pages/Root/Root.css";
+import { Badge } from "antd";
 const { Header } = Layout;
+
 const CustomHeader = ({ collapsed, toggle, colorBgContainer }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const navigate = useNavigate();
@@ -18,11 +20,12 @@ const CustomHeader = ({ collapsed, toggle, colorBgContainer }) => {
         className: "trigger",
         onClick: () => toggle(!collapsed),
       })}
-      <div className="cart-count d-flex align-items-center">
+      <div className="cart-count d-flex align-items-center m-4">
         <b>
-          <p className="mt-3 mr-2">{cartItems.length}</p>
+          <Badge count={cartItems.length} offset={[10, 10]}>
+            <ShoppingCartOutlined onClick={() => navigate("/cart")} />
+          </Badge>
         </b>
-        <ShoppingCartOutlined onClick={() => navigate("/cart")} />
       </div>
     </Header>
   );
