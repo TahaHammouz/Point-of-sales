@@ -1,30 +1,19 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CustomTable from "../../components/UI/Table/Table";
+import CustomTable from "src/components/UI/Table/Table";
 import { Input, Modal, Button, Form, notification, Select } from "antd";
 import * as Yup from "yup";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Popconfirm } from "antd";
-
+import { productValidationSchema } from "../../validationSchemas";
 import {
   fetchProducts,
   removeProduct,
   setLoading,
   updateProduct,
-} from "../../redux/slices/productSlice";
+} from "src/redux/slices/productSlice";
 const { Search } = Input;
-const editProductSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  price: Yup.number()
-    .typeError("Price must be a number")
-    .required("Price is required")
-    .moreThan(0, "Price must be greater than or equal to 0"),
-  category: Yup.string().required("Category is required"),
-  code: Yup.string().required("Code is required"),
-  image: Yup.string()
-    .url("Image must be a valid URL")
-    .required("Image is required"),
-});
+
 const ProductTable = () => {
   const products = useSelector((state) => state.product.products);
   const loading = useSelector((state) => state.product.loading);
@@ -61,7 +50,7 @@ const ProductTable = () => {
 
   const handleEditSubmit = async (code) => {
     try {
-      await editProductSchema.validate(editValues);
+      await productValidationSchema.validate(editValues);
       dispatch(setLoading(true));
       const productToUpdate = products.find((product) => product.code === code);
       const { id, ...updatedValues } = editValues;

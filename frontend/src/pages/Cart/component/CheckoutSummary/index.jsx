@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { InputNumber } from "antd";
 import styles from "./CheckoutSummary.module.css";
-import Button from "../../components/UI/Button/Button";
+import Button from "src/components/UI/Button/Button";
 
 const CheckoutSummary = () => {
   const cartItems = useSelector((state) => state.cart.items);

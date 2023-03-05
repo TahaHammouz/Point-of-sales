@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
-import AuthForm from "./AuthForm";
-import { API_BASE_URL } from "../../constants/api";
+import AuthForm from "./component/Signin";
+import { API_BASE_URL } from "src/constants/api";
 const AuthenticationPage = () => {
   return <AuthForm />;
 };

@@ -1,33 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as Yup from "yup";
 import { Modal, Button, Input, Select } from "antd";
-import { addProductData } from "../../redux/slices/productSlice";
+import { addProductData } from "src/redux/slices/productSlice";
 import { notification } from "antd";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import InputMask from "react-input-mask";
-
+import { productValidationSchema } from "../../validationSchemas";
 const { Option } = Select;
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Product name is required"),
-  image: Yup.string()
-    .required("Image URL is required")
-    .matches(
-      /^(http|https):\/\/[^\s/$.?#].[^\s]*$/i,
-      "Please enter a valid image URL"
-    ),
-  price: Yup.number()
-    .moreThan(0, "Price must be greater than 0")
-    .required("Price is required"),
-  category: Yup.string().required("Category is required"),
-  code: Yup.string()
-    .required("Code is required")
-    .matches(/^([A-Z0-9]){3}-([A-Z0-9]){3}-([A-Z0-9]){3}$/, {
-      message: "Please enter a valid code",
-      excludeEmptyString: true,
-    }),
-});
 
 const ProductForm = () => {
   const [visible, setVisible] = useState(false);
@@ -84,22 +63,29 @@ const ProductForm = () => {
             category: "",
             code: "",
           }}
-          validationSchema={validationSchema}
+          validationSchema={productValidationSchema}
           onSubmit={handleSubmit}
         >
           {({ errors, touched, isSubmitting }) => (
             <Form>
               <label htmlFor="name">Product Name</label>
               <Field name="name" as={Input} />
-              <ErrorMessage name="name" />
-
+              {touched.name && errors.name && (
+                <div style={{ color: "red" }}>{errors.name}</div>
+              )}
+              <br />
               <label htmlFor="image">Image URL</label>
               <Field name="image" as={Input} type="url" />
-              <ErrorMessage name="image" />
+              {touched.image && errors.image && (
+                <div style={{ color: "red" }}>{errors.image}</div>
+              )}
               <br />
               <label htmlFor="price">Price</label>
               <Field name="price" as={Input} type="number" />
-              <ErrorMessage name="price" />
+              {touched.price && errors.price && (
+                <div style={{ color: "red" }}>{errors.price}</div>
+              )}
+              <br />
               <br />
               <label htmlFor="category">Category</label>
               <Field name="category">
@@ -118,11 +104,11 @@ const ProductForm = () => {
                   </Select>
                 )}
               </Field>
+              <br />
               {touched.category && errors.category && (
                 <div style={{ color: "red" }}>{errors.category}</div>
               )}
               <br />
-
               <label htmlFor="code">Code</label>
               <Field name="code">
                 {({ field, form }) => (
@@ -144,7 +130,7 @@ const ProductForm = () => {
               {touched.code && errors.code && (
                 <div style={{ color: "red" }}>{errors.code}</div>
               )}
-
+              <br /> <br />
               <Button type="primary" htmlType="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit"}
               </Button>

@@ -1,5 +1,5 @@
-import CategoryTable from "./CategoryTable";
-import AddCategory from "./AddCategory";
+import CategoryTable from "./component/CategoriesTable";
+import AddCategory from "./component/AddCategory";
 const Categories = () => {
 
   return (

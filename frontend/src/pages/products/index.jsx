@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import ProductForm from "./ProductForm";
-import ProductTable from "./ProductTable";
-import { fetchProducts } from "../../redux/slices/productSlice";
+import ProductForm from "./component/AddProduct";
+import ProductTable from "./component/ProductsTable";
+import { fetchProducts } from "src/redux/slices/productSlice";
 import { useDispatch } from "react-redux";
 
 const Products = () => {

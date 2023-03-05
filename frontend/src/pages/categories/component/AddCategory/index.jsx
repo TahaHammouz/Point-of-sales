@@ -3,7 +3,7 @@ import { Modal, Button, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { saveCategory } from "../../redux/slices/categorySlice";
+import { saveCategory } from "src/redux/slices/categorySlice";
 
 const validationSchema = Yup.object().shape({
   category: Yup.string().required("Category name is required"),

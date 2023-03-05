@@ -2,9 +2,9 @@ import { Outlet } from "react-router-dom";
 import { Layout } from "antd";
 import React, { useState } from "react";
 import "./Root.css";
-import SideMenu from "../../components/Menu/SideMenu";
-import CustomHeader from "../../components/Menu/CustomHeader";
-import CustomLayout from "../../components/Menu/CustomLayout";
+import SideMenu from "src/components/Menu/SideMenu";
+import CustomHeader from "src/components/Menu/CustomHeader";
+import CustomLayout from "src/components/Menu/CustomLayout";
 
 const { Sider, Content } = Layout;
 const RootLayout = () => {

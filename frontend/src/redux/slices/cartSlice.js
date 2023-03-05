@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { API_BASE_URL } from "../../constants/api";
+import { API_BASE_URL } from "src/constants/api";
 import { notification } from "antd";
 const cartSlice = createSlice({
   name: "cart",

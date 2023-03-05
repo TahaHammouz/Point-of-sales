@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputNumber } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import CustomTable from "../../components/UI/Table/Table";
-import CheckoutSummary from "./CheckoutSummary";
+import CustomTable from "src/components/UI/Table/Table";
+import CheckoutSummary from "./component/CheckoutSummary";
 import {
   removeCartItem,
   updateCartItemOnServer,
-  fetchCartItems,
-} from "../../redux/slices/cartSlice";
-import styles from "./CheckoutSummary.module.css";
+} from "src/redux/slices/cartSlice";
+import styles from "./component/CheckoutSummary/CheckoutSummary.module.css";
+
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const loading = useSelector((state) => state.cart.loading);

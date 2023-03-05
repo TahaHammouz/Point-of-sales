@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { notification } from "antd";
 
-import { API_BASE_URL } from "../../constants/api";
+import { API_BASE_URL } from "src/constants/api";
 const initialState = {
   products: [],
   loading: false,

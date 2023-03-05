@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
 import axios from "axios";
-import { API_BASE_URL } from "../../constants/api";
+import { API_BASE_URL } from "src/constants/api";
 const initialState = {
   categories: JSON.parse(localStorage.getItem("categories")) || [],
   loading: false,

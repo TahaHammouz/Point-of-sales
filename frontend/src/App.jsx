@@ -1,14 +1,14 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import ErrorPage from "./pages/Error/Error";
-import Home from "./pages/home/Home";
-import Products from "./pages/products/Products";
-import RootLayout from "./pages/Root/Root";
-import Categories from "./pages/categories/Categories";
+import ErrorPage from "src/pages/Error";
+import Home from "./pages/home";
+import Products from "./pages/products";
+import RootLayout from "./pages/Root";
+import Categories from "src/pages/categories";
 import React, { useState, useEffect } from "react";
-import Cart from "./pages/Cart/Cart";
+import Cart from "./pages/cart";
 import AuthenticationPage, {
   action as authAction,
-} from "./pages/auth/Authentication";
+} from "./pages/auth";
 import { action as logoutAction } from "./pages/auth/Logout";
 import { checkAuthLoader } from "./util/auth";
 import { tokenLoader } from "./util/auth";

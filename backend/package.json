@@ -1,5 +1,5 @@
 {
-  "dependencies": {
-    "json-server": "^0.17.1"
+  "devDependencies": {
+    "json-server": "^0.17.2"
   }
 }

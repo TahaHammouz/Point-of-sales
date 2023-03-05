@@ -1,12 +1,12 @@
-import CustomTable from "../../components/UI/Table/Table";
+import CustomTable from "src/components/UI/Table/Table";
 import { useState, useRef } from "react";
 import { Input, Modal, Form } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {
   deleteCategoryById,
   updateCategory,
-} from "../../redux/slices/categorySlice";
-import { fetchCategories } from "../../redux/slices/categorySlice";
+} from "src/redux/slices/categorySlice";
+import { fetchCategories } from "src/redux/slices/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, message, Popconfirm } from "antd";
 
