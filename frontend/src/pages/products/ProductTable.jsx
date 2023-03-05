@@ -4,6 +4,7 @@ import CustomTable from "../../components/UI/Table/Table";
 import { Input, Modal, Button, Form, notification, Select } from "antd";
 import * as Yup from "yup";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Popconfirm } from "antd";
 
 import {
   fetchProducts,
@@ -60,6 +61,7 @@ const ProductTable = () => {
 
   const handleEditSubmit = async (code) => {
     try {
+      await editProductSchema.validate(editValues);
       dispatch(setLoading(true));
       const productToUpdate = products.find((product) => product.code === code);
       const { id, ...updatedValues } = editValues;
@@ -125,10 +127,16 @@ const ProductTable = () => {
       render: (_, record) => (
         <div className="d-flex">
           <EditOutlined className="mx-2" onClick={() => handleEdit(record)} />
-          <DeleteOutlined
-            className="mx-2"
-            onClick={() => handleDelete(record.id)}
-          />
+          <Popconfirm
+            placement="topRight"
+            title={"Delete Product"}
+            description={`Are you sure you want delete "${record.name}"`}
+            onConfirm={() => handleDelete(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <DeleteOutlined className="mx-2" />
+          </Popconfirm>
         </div>
       ),
     },
@@ -170,11 +178,12 @@ const ProductTable = () => {
               value={editValues?.category}
               onChange={(value) => handleEditChange("category", value)}
             >
-              {Array.isArray(categories) &&categories.map((category) => (
-                <Select.Option key={category.id} value={category.category}>
-                  {category.category}
-                </Select.Option>
-              ))}
+              {Array.isArray(categories) &&
+                categories.map((category) => (
+                  <Select.Option key={category.id} value={category.category}>
+                    {category.category}
+                  </Select.Option>
+                ))}
             </Select>
           </Form.Item>
 

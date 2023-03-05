@@ -8,6 +8,7 @@ import {
 } from "../../redux/slices/categorySlice";
 import { fetchCategories } from "../../redux/slices/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, message, Popconfirm } from "antd";
 
 const { Search } = Input;
 
@@ -76,10 +77,16 @@ const CategoryTable = () => {
             className="mx-2"
             onClick={() => handleEditClick(record)}
           />
-          <DeleteOutlined
-            className="mx-2"
-            onClick={() => handleDelete(record.id)}
-          />
+          <Popconfirm
+            placement="topRight"
+            title={"Delete Category"}
+            description={`Are you sure you want delete "${record.category}"`}
+            onConfirm={() => handleDelete(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <DeleteOutlined className="mx-2" />
+          </Popconfirm>
         </div>
       ),
     },
