@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-import CategoryTable from ".";
+import CategoryTable from "./index";
 
 const mockStore = configureMockStore();
 
