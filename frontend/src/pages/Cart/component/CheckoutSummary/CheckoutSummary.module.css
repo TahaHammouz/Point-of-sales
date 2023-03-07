@@ -2,9 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-text-align: center;
-
-
+  text-align: center;
 }
 
 .total {
@@ -31,7 +29,6 @@ text-align: center;
   align-items: left;
   display: flex;
   gap: 10px;
-  
 }
 .cancel {
   background-color: red;

@@ -18,7 +18,7 @@ const CheckoutSummary = () => {
   const totalPrice = subTotal + taxAmount - discountAmount;
 
   return (
-    <div className={styles["checkout-summary"]} style={{ textAlign: 'left' }}>
+    <div className={styles["checkout-summary"]} style={{ textAlign: "left" }}>
       <div className={styles.container}>
         <label>Subtotal: &nbsp;</label>
         <span>{subTotal.toFixed(2)}$</span>
