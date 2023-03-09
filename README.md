@@ -44,6 +44,10 @@ This Point-of-sale system is a web app designed to be used by supermarkets, to h
 <h2>Point-Of-Sales Documentation </h2>
 <a href="https://west-supply-52c.notion.site/Documentation-bdd19fb1906a47019ea24750f980c306"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/1200px-Notion-logo.svg.png" alt="notion" style="width:42px;height:42px;"></a>
 
+<a href="https://www.chromatic.com/library?appId=63d9329ff6792bdf105d80f5"><img src="https://static-00.iconduck.com/assets.00/storybook-icon-icon-412x512-341bo8r1.png" alt="storybook" style="width:42px;height:42px;"></a>
+
+
+
 <h2>Setting up the project</h2>
 <ul>   
 <li>Access tu the project folder on the computer via Termaial or Git Bash</li>
