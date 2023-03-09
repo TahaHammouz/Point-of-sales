@@ -3,17 +3,17 @@
   padding: 15px;
   margin-top: 20px;
   background-color: rgb(255, 255, 255);
+  text-align: center;
 }
 .item:hover {
   transform: scale(1.05);
   transition: all 0.3s;
 }
 .item .name {
-  color: #ff6347;
+  color: #070100;
   font-size: 20px;
 }
 .item .price {
-  text-align: center;
   color: rgba(0, 0, 0, 0.699);
   font-size: 20px;
 }

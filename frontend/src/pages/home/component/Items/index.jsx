@@ -22,8 +22,8 @@ const Items = ({ item }) => {
   return (
     <div className={styles.item}>
       <img src={item.image} alt="item" height="100" width="100" />
-      <h4>{item.name}</h4>
-      <h4>${item.price}</h4>
+      <h4 className={styles.name}>{item.name}</h4>
+      <h4 className={styles.price}>${item.price}</h4>
       <div className="d-flex justify-content-center">
         <Button onClick={handleAddToCart}>Add To Cart</Button>
       </div>
