@@ -1,20 +1,23 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import ErrorPage from "src/pages/Error";
+
 import Home from "./pages/home";
 import Products from "./pages/products";
-import RootLayout from "./pages/Root";
-import Categories from "src/pages/categories";
-import React, { useEffect } from "react";
-import LandPage from "src/pages/LandPage";
 import Cart from "./pages/cart";
+import Categories from "src/pages/categories";
+import ErrorPage from "src/pages/Error";
+import LandPage from "src/pages/LandPage";
 import AuthenticationPage, { action as authAction } from "./pages/auth";
-import { action as logoutAction } from "./pages/auth/Logout";
-import { checkAuthLoader } from "./util/auth";
-import { tokenLoader } from "./util/auth";
-import { fetchProducts } from "src/redux/slices/productSlice";
-import { fetchCartItems } from "src/redux/slices/cartSlice";
+import RootLayout from "./pages/Root";
+
+import { checkAuthLoader, tokenLoader } from "./util/auth";
+import {
+  fetchProducts,
+  fetchCartItems,
+} from "src/redux/slices/productSlice";
 import { fetchCategories } from "src/redux/slices/categorySlice";
-import { useDispatch } from "react-redux";
+import { action as logoutAction } from "./pages/auth/Logout";
 
 const router = createBrowserRouter([
   {
