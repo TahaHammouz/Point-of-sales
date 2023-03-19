@@ -1,3 +1,4 @@
+import React from "react";
 import CustomTable from "src/components/UI/Table/Table";
 import { useState, useRef } from "react";
 import { Input, Modal, Form } from "antd";
@@ -8,8 +9,7 @@ import {
 } from "src/redux/slices/categorySlice";
 import { fetchCategories } from "src/redux/slices/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, message, Popconfirm } from "antd";
-
+import { Popconfirm } from "antd";
 const { Search } = Input;
 
 const CategoryTable = () => {

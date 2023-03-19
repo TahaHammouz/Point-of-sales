@@ -12,10 +12,8 @@ import AuthenticationPage, { action as authAction } from "./pages/auth";
 import RootLayout from "./pages/Root";
 
 import { checkAuthLoader, tokenLoader } from "./util/auth";
-import {
-  fetchProducts,
-  fetchCartItems,
-} from "src/redux/slices/productSlice";
+import { fetchProducts } from "src/redux/slices/productSlice";
+import { fetchCartItems } from "src/redux/slices/cartSlice";
 import { fetchCategories } from "src/redux/slices/categorySlice";
 import { action as logoutAction } from "./pages/auth/Logout";
 
